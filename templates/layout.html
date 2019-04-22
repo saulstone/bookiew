@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html style="height:100%">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <title>Bookiew</title>
+<style>
+
+body{
+  background-color: #DCDCDC;
+  style="height:100%"
+}
+
+</style>
+  </head>
+
+  <body>
+    <header class='container bg-light h-25 text-center '><!--background ,height,text alignment-->
+      <h1 class="display-2 py-4">Bookiew</h1><!--display is size,py is padding in y direction-->
+      <blockquote class="blockquote">Books are the window through which soul looks out.</blockquote>
+      <div class="blockquote-footer">Anonymous </div>
+    </header>
+    <!-- CAN ALSO USE JUMBOTRON CLASS OF BOOTSTRAP TO MAKE BIG BOXES-->
+
+<main>
+  <div class='container h-25'>
+  {%block body%}{%endblock%}
+   </div>
+ </main>
+<!--
+ <script type="text/javascript">
+   var selectCaptchaa;
+   $( document ).ready(function() {
+   selectCaptchaa = function () {
+   const arr=['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+   var st="";
+   var i;
+   for(i=0;i<7;i++){
+   let a=Math.floor(Math.random()*36);
+   st=st+arr[a];
+ }
+   document.getElementById("captcha").innerHTML=st;
+   return st;
+ }
+});
+$(document).ready( function () {
+selectCaptchaa();
+});
+ </script>
+
+ <script type="text/javascript">
+ var checkCaptcha;
+ $(document).ready(function() {
+ checkCaptcha=function(){
+ var string1=document.getElementById('captcha').value;
+ var string2=document.getElementById('ccaptcha').value;
+ if(string1!=string2){
+   $('#submitSignUpForm').prop('disabled',true);
+ }
+ }
+ });
+ </script>
+-->
+
+
+    <footer class='footer fixed-bottom text-center bg-light text-muted'>
+      <p>@saulstone</p>
+    </footer>
+
+</body>
+</html>

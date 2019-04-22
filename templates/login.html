@@ -1,0 +1,33 @@
+{%extends "layout.html"%}
+{% block body %}
+<div class='w-50 mx-auto my-2 p-1 text-center container'>{{log_in_message}}</div>
+<div class='row no-gutters container'>
+  <div class='col p-5'>
+        <form class='form-inline border border-danger p-1 bg-light' action="{{url_for('login')}}" method="post">
+            <legend class='text-center '>Register</legend>
+            <input class='form-control w-50 m-1' placeholder="....@xyz" type="email"  name="email" required>   E-mail
+            <input class='form-control w-50 m-1' type="password" id='userPassword' onkeyup="passwordMatch()" name="registerPassword" minlength="8" maxlength="15" required > Password
+            <button class="btn btn-success m-1 w-100" id='submitSignUpForm' type="submit">Register</button>
+        </form>
+    </div>
+    <div class='col p-5'>
+        <form class='form-inline border border-danger p-1 bg-light' action="{{url_for('login')}}"  method="post">
+            <legend class='text-center '>Log In</legend>
+            <input class='form-control w-50 m-1' placeholder="....@xyz"  type="email" name="logInEmail" required> E-mail
+            <input class='form-control w-50 m-1' type="password"  name="logInPassword" required>Password
+            <button class="btn btn-success m-1 w-100" type="submit">Log in</button>
+        </form>
+    </div>
+</div>
+<!--
+<div class='container text-center'>
+    <legend class='text-center'>Captcha</legend>
+    <p id = "captcha"></p>
+    <button class="btn btn-primary" type="button" onclick="selectCaptchaa()" >Refresh</button>
+    <legend class='text-center'>Re-enter Captcha</legend>
+    <input type="text" id="ccaptcha"required>
+    <button class="btn btn-primary" type="button" onclick="checkCaptcha()">Check Captcha</button>
+  </div>
+  -->
+
+{% endblock %}
