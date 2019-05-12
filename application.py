@@ -66,7 +66,8 @@ def login():
 @login_required
 def home():
     username=session.get('username')
-    message=Markup("""<p>welcome to bookiew</p>""")
+    #message=Markup("""<p>welcome to bookiew</p>""")
+    message = ""
     session["books"]=[]
     if request.method=="POST":
         message=('')

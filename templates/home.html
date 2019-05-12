@@ -17,12 +17,21 @@
     </head>
 
     <body>
-      <body style="height:100%">
-    <div class='bg-light container'>
-        <div class='float-left'><a href="{{url_for('home')}}">Home</a></div>
+
+      <header class='container bg-light h-25 text-center '>
+        <div class='float-left'><a href="{{url_for('home')}}">Home</a></div><!--background ,height,text alignment-->
         <div class='float-right'>{{username}}   <a href="{{url_for('logout')}}">   Log out</a></div>
+        <h1 class="display-2 py-4">Bookiew</h1><!--display is size,py is padding in y direction-->
+        <blockquote class="blockquote">Books are the window through which soul looks out.</blockquote>
+        <div class="blockquote-footer">Anonymous </div>
+      </header>
+
+    <body style="height:100%">
+    <div class='bg-light container'>
+
+
     </div>
-        <div class='container  h-25'>
+    <div class='container h-25 mt-4 '>  <!--marigin of top mt-->
     <nav class='navbar navbar-expand bg-dark navbar-dark justify-content-center'>
     <form class="form-inline " action="{{url_for('home')}}" method="POST">
         <input class="form-control mr-2" type="text" placeholder="Search" name="text">
@@ -31,8 +40,9 @@
 </nav>
 </div>
 <main>
-  <div class='container bg-light h-25 p-3'>
-      <h3 class='text-center p-3'>{{ message }}</h3>
+
+  <div class='container h-25 p-3'>
+      <h3 class='text-center p-3'>{{ message}}</h3>
 
       <div class="list-group">
           {% for x in data %}
