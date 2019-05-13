@@ -72,7 +72,7 @@ def home():
     if request.method=="POST":
         message=('')
         text=request.form.get('text')
-        data=db.execute("SELECT * FROM mytable WHERE author iLIKE '%"+text+"%' OR title iLIKE '%"+text+"%' OR isbn iLIKE '%"+text+"%'").fetchall()
+        data=db.execute("SELECT * FROM books WHERE author iLIKE '%"+text+"%' OR title iLIKE '%"+text+"%' OR isbn iLIKE '%"+text+"%'").fetchall()
         for x in data:
             session['books'].append(x)
         if len(session["books"])==0:
@@ -87,11 +87,11 @@ def bookpage(isbn):
     warning=""
     username=session.get('username')
     session["reviews"]=[]
-    secondreview=db.execute("SELECT * FROM book_review WHERE isbn = :isbn AND username= :username",{"username":username,"isbn":isbn}).fetchone()
+    secondreview=db.execute("SELECT * FROM reviews WHERE isbn = :isbn AND username= :username",{"username":username,"isbn":isbn}).fetchone()
     if request.method=="POST" and secondreview==None:
         review=request.form.get('textarea')
         rating=request.form.get('stars')
-        db.execute("INSERT INTO book_review (isbn, review, rating, username) VALUES (:a,:b,:c,:d)",{"a":isbn,"b":review,"c":rating,"d":username})
+        db.execute("INSERT INTO reviews (isbn, review, rating, username) VALUES (:a,:b,:c,:d)",{"a":isbn,"b":review,"c":rating,"d":username})
         db.commit()
     if request.method=="POST" and secondreview!=None:
         warning="Sorry. You cannot add second review."
@@ -99,16 +99,16 @@ def bookpage(isbn):
     res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "Cdjuz7jTYIwy5Jj9GhY9sw", "isbns": isbn})
     average_rating=res.json()['books'][0]['average_rating']
     work_ratings_count=res.json()['books'][0]['work_ratings_count']
-    reviews=db.execute("SELECT * FROM book_review WHERE isbn = :isbn",{"isbn":isbn}).fetchall()
+    reviews=db.execute("SELECT * FROM reviews WHERE isbn = :isbn",{"isbn":isbn}).fetchall()
     for y in reviews:
         session['reviews'].append(y)
-    data=db.execute("SELECT * FROM mytable WHERE isbn = :isbn",{"isbn":isbn}).fetchone()
+    data=db.execute("SELECT * FROM books WHERE isbn = :isbn",{"isbn":isbn}).fetchone()
     return render_template("book.html",data=data,reviews=session['reviews'],average_rating=average_rating,work_ratings_count=work_ratings_count,username=username,warning=warning)
 
 @app.route("/api/<string:isbn>")
 @login_required
 def api(isbn):
-    data=db.execute("SELECT * FROM mytable WHERE isbn = :isbn",{"isbn":isbn}).fetchone()
+    data=db.execute("SELECT * FROM books WHERE isbn = :isbn",{"isbn":isbn}).fetchone()
     if data==None:
         return render_template('404.html')
     res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "Cdjuz7jTYIwy5Jj9GhY9sw", "isbns": isbn})
